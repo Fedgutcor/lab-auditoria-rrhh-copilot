@@ -1,4 +1,5 @@
 name: ci
+# Hallazgo: se dispara en cualquier rama, sin filtro (debería limitarse a main / pull_request).
 on: [push]
 jobs:
   test:
@@ -9,5 +10,5 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -r requirements.txt
-      # Hallazgo: el pipeline no corre analisis estatico (SAST) ni escaneo de secretos
-      - run: python -m pytest || true
+      - run: python -m pytest
+      # Hallazgo: el pipeline no corre análisis estático (SAST) ni escaneo de secretos.

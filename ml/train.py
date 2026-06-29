@@ -1,15 +1,18 @@
-"""Entrena el modelo que prioriza candidatos."""
+"""Entrena el modelo que ORDENA candidatos (un reclutador humano decide)."""
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
 
+# Atributos protegidos: se excluyen del entrenamiento para evitar discriminación directa.
+PROTEGIDOS = ["genero", "edad", "nombre", "foto"]
 
-def entrenar():
-    # Hallazgo: el modelo se entrena con el historial de contrataciones de la empresa.
-    # Si ese historial tiene sesgo de genero, el modelo lo aprende y lo amplifica
-    # (caso Amazon 2018: su reclutador de IA penalizaba hojas de vida con la palabra 'women's').
-    df = pd.read_csv("data/contrataciones_historicas.csv")
+
+def entrenar(ruta_dataset):
+    # El dataset vive FUERA del repo y está pseudonimizado (no hay PII en el código).
+    df = pd.read_csv(ruta_dataset)
     y = df["fue_contratado"]
-    X = df.drop(columns=["fue_contratado"])  # incluye genero, edad y universidad como features
-    modelo = RandomForestClassifier()
+    X = df.drop(columns=["fue_contratado"] + PROTEGIDOS)
+    modelo = RandomForestClassifier(random_state=42)
     modelo.fit(X, y)
+    # Hallazgo: el modelo se entrena con datos históricos pero NO se evalúa el sesgo
+    # (sin test set ni métricas de equidad). Atributos proxy podrían reintroducir sesgo.
     return modelo

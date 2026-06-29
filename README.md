@@ -1,14 +1,17 @@
 # rrhh-copilot
 
-> ⚠️ **REPOSITORIO DE EJEMPLO — INTENCIONALMENTE VULNERABLE**
-> Este código contiene fallos de seguridad, privacidad y gobernanza de IA **plantados a propósito**
-> con fines educativos (auditoría asistida por IA). **No es código de producción y no debe usarse como tal.**
-> Las credenciales son placeholders documentados de AWS (no son reales).
+> ⚠️ **REPOSITORIO DE EJEMPLO PARA AUDITORÍA — uso docente**
+> Código de ejemplo con áreas de mejora plantadas a propósito para practicar auditoría asistida por IA.
+> No es código de producción.
 
-Asistente de IA para RR.HH. de ejemplo: filtra hojas de vida y sugiere ascensos.
+Asistente de IA que **ORDENA** hojas de vida para que un reclutador humano decida.
+
+## Diseño (lo que está BIEN hecho a propósito)
+
+- **Un humano siempre decide**: el sistema solo prioriza; no descarta a nadie de forma automática.
+- **Sin atributos protegidos**: género, edad, nombre y foto se excluyen del scoring.
+- **Procesamiento local**: no se envían datos personales a terceros.
 
 ## Cómo usar este repo en la clase
 
-Este repositorio no tiene secretos commiteados ni CVEs críticos, pero plantea **dilemas de privacidad y de gobernanza de IA** propios de un sistema que decide sobre personas.
-
-Auditalo con Claude o Copilot y preguntate: ¿hay base legal para tratar estos datos? ¿el modelo hereda sesgos? ¿hay una persona que responda por cada decisión?
+No tiene secretos commiteados ni decisiones automáticas ilegales. Pero sí tiene **brechas de gobernanza**: el modelo no se evalúa contra sesgo, no hay trazabilidad de las recomendaciones y arrastra una dependencia con vulnerabilidad conocida. Auditalo con Claude o Copilot: deberías llegar a **REQUIERE REVISIÓN** (hay altas, pero nada que bloquee de forma absoluta).
